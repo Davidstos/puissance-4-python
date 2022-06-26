@@ -13,7 +13,7 @@ grid=[]
 row_count_column = []
 unvalid = True
 
-
+# Count the number of column
 def count_column():
     row_count_column.clear()
     for i in range(nb_column):
@@ -30,6 +30,7 @@ def print_grid():
         print(char, end=' ')
     print()
 
+# Function that add coin to the grid
 def add_coin(choice, symbol):
     for row in grid[::-1]:
         if row[choice] == ".":
@@ -42,28 +43,23 @@ def add_coin(choice, symbol):
     have used an alternative
     """
 
+# Creation of the grid
 for row in range(nb_row):
     grid.append(["."]*nb_column)
 
-while retry == "o" or retry == "O":
-    victory = False
-    print_grid()
-    while victory==False:
-        while unvalid:
-            choice = int(input('Joueur 1 à vous de jouer!\n'))
-            unvalid = add_coin(choice, "o")
-            if unvalid:
-                print('Colonne pleine rejouez!\n')
-        unvalid = True
+# Main function
+def main():
+    while retry == "o" or retry == "O":
+        victory = False
         print_grid()
-        while unvalid:
-            choice = int(input('Joueur 2 à vous de jouer!\n'))
-            unvalid = add_coin(choice, "x")
-            if unvalid:
+        while victory==False:
+            while add_coin(int(input('Joueur 1 à vous de jouer!\n')), "o"):
                 print('Colonne pleine rejouez!\n')
-        unvalid = True
-        print_grid()
-        # victory = True
-    retry = input("Voulez-vous rejouer? [O/N]")
+            print_grid()
+            while add_coin(int(input('Joueur 2 à vous de jouer!\n')), "x"):
+                print('Colonne pleine rejouez!\n')
+            print_grid()
+            # victory = True
+        retry = input("Voulez-vous rejouer? [O/N]")
 
 

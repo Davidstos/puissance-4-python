@@ -7,7 +7,7 @@ nb_column = int(7)
 nb_row = int(6)
 # Victory boolean
 victory = bool()
-retry="o"
+retry = "o"
 # Grid List
 grid=[]
 row_count_column = []
@@ -47,19 +47,18 @@ def add_coin(choice, symbol):
 for row in range(nb_row):
     grid.append(["."]*nb_column)
 
-# Main function
-def main():
-    while retry == "o" or retry == "O":
-        victory = False
+# Main
+while retry == "o" or retry == "O":
+    victory = False
+    print_grid()
+    while victory==False:
+        while add_coin(int(input('Joueur 1 à vous de jouer!\n')), "o"):
+            print('Colonne pleine rejouez!\n')
         print_grid()
-        while victory==False:
-            while add_coin(int(input('Joueur 1 à vous de jouer!\n')), "o"):
-                print('Colonne pleine rejouez!\n')
-            print_grid()
-            while add_coin(int(input('Joueur 2 à vous de jouer!\n')), "x"):
-                print('Colonne pleine rejouez!\n')
-            print_grid()
-            # victory = True
-        retry = input("Voulez-vous rejouer? [O/N]")
+        while add_coin(int(input('Joueur 2 à vous de jouer!\n')), "x"):
+            print('Colonne pleine rejouez!\n')
+        print_grid()
+        # victory = True
+    retry = input("Voulez-vous rejouer? [O/N]")
 
 

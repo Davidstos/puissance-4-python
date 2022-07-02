@@ -7,7 +7,6 @@ nb_column = int(7)
 nb_row = int(6)
 # Victory boolean
 victory = bool()
-retry = "o"
 # Grid List
 grid=[]
 row_count_column = []
@@ -47,18 +46,49 @@ def add_coin(choice, symbol):
 for row in range(nb_row):
     grid.append(["."]*nb_column)
 
-# Main
-while retry == "o" or retry == "O":
-    victory = False
-    print_grid()
-    while victory==False:
-        while add_coin(int(input('Joueur 1 à vous de jouer!\n')), "o"):
-            print('Colonne pleine rejouez!\n')
+# Check the input of the user
+def check_input(player_input, player):
+    while True:
+        print(nb_column)
+        if 0 <= int(player_input) < nb_column:
+            return int(player_input)
+        else:
+            player_input = input(f'Votre saisie est incorrect joueur {player} \nVeuillez saisir un chiffre entre 0 et 6!\n')
+
+
+# Start Game
+def start_game():
+    retry = "o"
+    while retry == "o" or retry == "O":
+        victory = False
         print_grid()
-        while add_coin(int(input('Joueur 2 à vous de jouer!\n')), "x"):
-            print('Colonne pleine rejouez!\n')
-        print_grid()
-        # victory = True
-    retry = input("Voulez-vous rejouer? [O/N]")
+        while victory==False:
+            while add_coin(check_input(input('Joueur 1 à vous de jouer!\n'), 1), "o"):
+                print('Colonne pleine rejouez!\n')
+            print_grid()
+            while add_coin(check_input(input('Joueur 2 à vous de jouer!\n'), 2), "x"):
+                print('Colonne pleine rejouez!\n')
+            print_grid()
+            # victory = True
+        retry = input("Voulez-vous rejouer? [O/N]")
+
+# Menu
+def menu():
+    status = input("S pour commencer une partie\nE Pour modifier votre skin\nF pour terminer\n")
+    match status:
+        case "S":
+            print("Démarrage de la partie")
+            start_game()
+        case "E":
+            print("Changement du skin")
+        case "F":
+            quit("A la prochaine :)")
+        case _:
+            print("Le choix n'est pas correct")
+
+
+menu()
+
+
 
 

@@ -21,15 +21,17 @@ def count_column():
         row_count_column.append(i)
     return row_count_column
 
+
 # Function that format the display of the grid
 def print_grid():
     for row in grid:
         for char in row:
-            print(char, end=' ')
+            print(char, end=" ")
         print()
     for char in count_column():
-        print(char, end=' ')
+        print(char, end=" ")
     print()
+
 
 # Function that add coin to the grid
 def add_coin(choice, symbol):
@@ -44,11 +46,13 @@ def add_coin(choice, symbol):
     have used an alternative
     """
 
+
 # Creation of the grid
 def create_grid():
     grid.clear()
     for row in range(nb_row):
         grid.append(["."] * nb_column)
+
 
 # Check if the user input is valid
 def check_input(player_input, player):
@@ -56,11 +60,13 @@ def check_input(player_input, player):
         try:
             int(player_input)
             if 0 <= int(player_input) < nb_column:
-                os.system('cls')
+                os.system("cls")
                 return int(player_input)
         except ValueError:
             player_input = input(
-                f'Votre saisie est incorrecte joueur {player} \nVeuillez saisir un chiffre entre 0 et 6!\n')
+                f"Votre saisie est incorrecte joueur {player} \nVeuillez saisir un chiffre entre 0 et 6!\n"
+            )
+
 
 # Function to check if 4 coins are aligned horizontally
 def row_alignment(grid: list):
@@ -84,6 +90,7 @@ def row_alignment(grid: list):
                 nb_player_2 = 0
     return False
 
+
 # Function to check if 4 coins are aligned vertically
 def column_alignment(grid: list):
     for j in range(7):
@@ -105,6 +112,7 @@ def column_alignment(grid: list):
                 nb_player_1 = 0
                 nb_player_2 = 0
     return False
+
 
 # Function to check if 4 coins are diagonal descending aligned
 def down_alignment(grid: list):
@@ -158,6 +166,7 @@ def down_alignment(grid: list):
 
     return False
 
+
 # Function to check if 4 coins are diagonal ascending aligned
 def up_alignment(grid: list):
     for i in range(3, 6):
@@ -209,6 +218,7 @@ def up_alignment(grid: list):
             y -= 1
     return False
 
+
 # Function that displays the scoreboard
 def score_board(score_player_one, score_player_two):
     print(" ------------- ")
@@ -217,6 +227,7 @@ def score_board(score_player_one, score_player_two):
     print(f"| Joueur 1 : {score_player_one} |")
     print(f"| Joueur 2 : {score_player_two} |")
     print(" ------------- ")
+
 
 # Function that change the skin of coins
 def change_coin():
@@ -231,19 +242,24 @@ def change_coin():
     match choice:
         case "1":
             skin_coin_player_one.clear()
-            skin_coin_player_one.append(str(input("Choisissez votre nouveau skin ex: V\n")))
-            os.system('cls')
+            skin_coin_player_one.append(
+                str(input("Choisissez votre nouveau skin ex: V\n"))
+            )
+            os.system("cls")
         case "2":
             skin_coin_player_two.clear()
-            skin_coin_player_two.append(str(input("Choisissez votre nouveau skin ex: V\n")))
-            os.system('cls')
+            skin_coin_player_two.append(
+                str(input("Choisissez votre nouveau skin ex: V\n"))
+            )
+            os.system("cls")
         case "3":
-            os.system('cls')
+            os.system("cls")
             menu()
         case _:
-            os.system('cls')
+            os.system("cls")
             print("Le choix n'est pas correct")
             change_coin()
+
 
 # Function that launches the game
 def start_game():
@@ -257,8 +273,11 @@ def start_game():
         score_board(score_player_one, score_player_two)
         print_grid()
         while victory == False:
-            while add_coin(check_input(input('Joueur 1 à vous de jouer!\n'), 1), skin_coin_player_one[0]):
-                print('Colonne pleine rejouez!\n')
+            while add_coin(
+                check_input(input("Joueur 1 à vous de jouer!\n"), 1),
+                skin_coin_player_one[0],
+            ):
+                print("Colonne pleine rejouez!\n")
             score_board(score_player_one, score_player_two)
             print_grid()
             g1 = row_alignment(grid)
@@ -271,8 +290,11 @@ def start_game():
                 victory = True
                 score_player_one += 1
                 continue
-            while add_coin(check_input(input('Joueur 2 à vous de jouer!\n'), 2), skin_coin_player_two[0]):
-                print('Colonne pleine rejouez!\n')
+            while add_coin(
+                check_input(input("Joueur 2 à vous de jouer!\n"), 2),
+                skin_coin_player_two[0],
+            ):
+                print("Colonne pleine rejouez!\n")
             score_board(score_player_one, score_player_two)
             print_grid()
 
@@ -303,7 +325,7 @@ def menu():
     choice = input()
     match choice:
         case "1":
-            os.system('cls')
+            os.system("cls")
             print("Démarrage de la partie")
             start_game()
         case "2":
@@ -312,7 +334,9 @@ def menu():
         case "3":
             quit("A la prochaine :)")
         case _:
-            os.system('cls')
+            os.system("cls")
             print("Le choix n'est pas correct")
             menu()
+
+
 menu()
